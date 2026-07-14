@@ -7,7 +7,7 @@ const SECTIONS = [
   { id: "hero",       label: "Home" },
   { id: "premise",    label: "Premise" },
   { id: "bts",        label: "BTS" },
-  { id: "moodboard",  label: "World" },
+  { id: "cast",       label: "Cast" },
   { id: "team",       label: "Team" },
   { id: "contact",    label: "Contact" },
 ];

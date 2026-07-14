@@ -3,7 +3,7 @@ import SideNav from "@/app/components/SideNav";
 import Hero from "@/app/components/Hero";
 import Premise from "@/app/components/Premise";
 import BTSGallery from "@/app/components/BTSGallery";
-import MoodboardStrip from "@/app/components/MoodboardStrip";
+import Cast from "@/app/components/Cast";
 import Team from "@/app/components/Team";
 import Footer from "@/app/components/Footer";
 
@@ -15,7 +15,7 @@ export default function Home() {
       <Hero />
       <Premise />
       <BTSGallery />
-      <MoodboardStrip />
+      <Cast />
       <Team />
       <Footer />
     </main>

@@ -6,22 +6,12 @@ import { fadeUpVariant, fadeInVariant, staggerContainer } from "@/app/lib/animat
 const ABOVE_THE_LINE = [
   { role: "Written & Directed by", name: "Alexander Bello" },
   { role: "Producers", name: "Alexa Swinton\nSaskia Sommer\nAlexander Bello" },
-  { role: "Executive Producer", name: "Shaun Seneviratne" },
-  { role: "Executive Producer", name: "Marla Evans" },
+  { role: "Executive Producers", name: "Shaun Seneviratne\nMarla Evans" },
   { role: "Director of Photography", name: "Grant Bennett" },
   { role: "Edited by", name: "Alexander Bello" },
   { role: "Music by", name: "Ziv Bard" },
   { role: "SFX Designer & Wardrobe Stylist", name: "Simoné Chariell" },
-];
-
-const CAST = [
-  { role: "Aja Henry", name: "Carla R Stewart" },
-  { role: "Sol Henry", name: "Kamiré" },
-  { role: "Francis Hughes", name: "Ari Brand" },
-  { role: "Patrick", name: "John Paul Berry" },
-  { role: "Isla", name: "Taylor Nicole Kaplan" },
-  { role: "Reid", name: "Kalet Ponce de Leon" },
-  { role: "Waiter", name: "Jonah Kim" },
+  { role: "Post-Production Sound Mixer", name: "Diego Candelma" },
 ];
 
 const BELOW_THE_LINE = [
@@ -95,45 +85,23 @@ export default function Team() {
           <div className="w-8 h-px bg-ember-gold/20 mx-auto mt-4" />
         </motion.div>
 
-        {/* Two-column layout: above-the-line + cast */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 mb-16">
-          {/* Left — above the line crew */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            className="flex flex-col gap-4"
-          >
-            <p className="section-label text-pale-cream/30 mb-4">Filmmakers</p>
+        {/* Filmmakers */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          className="flex flex-col gap-4 mb-16"
+        >
+          <p className="section-label text-pale-cream/30 mb-4">Filmmakers</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {ABOVE_THE_LINE.map((c) => (
               <CreditRow key={c.role + c.name} role={c.role} name={c.name} />
             ))}
-          </motion.div>
+          </div>
+        </motion.div>
 
-          {/* Right — cast */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            className="flex flex-col gap-4"
-          >
-            <p className="section-label text-pale-cream/30 mb-4">Cast</p>
-            {CAST.map((c) => (
-              <motion.div
-                key={c.role}
-                variants={fadeUpVariant}
-                className="flex flex-col gap-0.5 border-b border-pale-cream/6 pb-4"
-              >
-                <span className="font-body text-[10px] tracking-[0.22em] uppercase text-pale-cream/30">{c.role}</span>
-                <span className="font-display text-lg text-pale-cream/80 font-light">{c.name}</span>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Below the line — full width, 2-col grid */}
+        {/* Below the line crew */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -149,20 +117,6 @@ export default function Team() {
               <CreditRow key={c.role + c.name} role={c.role} name={c.name} />
             ))}
           </div>
-        </motion.div>
-
-        {/* Closing title card */}
-        <motion.div
-          variants={fadeInVariant}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="mt-20 flex flex-col items-center gap-3 text-center"
-        >
-          <p className="font-body text-[10px] tracking-[0.35em] uppercase text-pale-cream/15">An</p>
-          <p className="font-display text-3xl md:text-4xl font-light tracking-widest text-pale-cream/30">Alexander Bello</p>
-          <p className="font-body text-[10px] tracking-[0.35em] uppercase text-pale-cream/15">film</p>
-          <div className="w-12 h-px bg-ember-gold/20 mt-4" />
         </motion.div>
 
       </div>
