@@ -6,9 +6,9 @@ import { mobileNavVariant, mobileNavLinkVariant } from "@/app/lib/animations";
 
 const NAV_LINKS = [
   { label: "Premise", href: "#premise" },
-  { label: "BTS", href: "#bts" },
   { label: "Cast", href: "#cast" },
   { label: "Team", href: "#team" },
+  { label: "BTS", href: "#bts" },
   { label: "Contact", href: "#contact" },
 ];
 

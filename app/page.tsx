@@ -14,9 +14,9 @@ export default function Home() {
       <SideNav />
       <Hero />
       <Premise />
-      <BTSGallery />
       <Cast />
       <Team />
+      <BTSGallery />
       <Footer />
     </main>
   );
