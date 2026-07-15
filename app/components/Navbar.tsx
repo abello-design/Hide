@@ -1,22 +1,25 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { mobileNavVariant, mobileNavLinkVariant } from "@/app/lib/animations";
+import { CAST } from "@/app/lib/cast-data";
 
 const NAV_LINKS = [
   { label: "Premise", href: "#premise" },
-  { label: "Cast", href: "#cast" },
-  { label: "Team", href: "#team" },
-  { label: "BTS", href: "#bts" },
+  { label: "Cast",    href: "#cast" },
+  { label: "Team",    href: "#team" },
+  { label: "BTS",     href: "#bts" },
   { label: "Contact", href: "#contact" },
 ];
 
 const easeOut = [0.23, 1, 0.32, 1] as const;
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled]       = useState(false);
+  const [menuOpen, setMenuOpen]       = useState(false);
+  const [castOpen, setCastOpen]       = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -31,6 +34,7 @@ export default function Navbar() {
 
   const handleLinkClick = (href: string) => {
     setMenuOpen(false);
+    setCastOpen(false);
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
@@ -62,18 +66,70 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-10">
-          {NAV_LINKS.map(({ label, href }) => (
-            <li key={href}>
-              <button
-                onClick={() => handleLinkClick(href)}
-                className="group relative font-body text-[11px] tracking-[0.28em] uppercase text-pale-cream/50 hover:text-pale-cream/90 transition-colors duration-200"
+          {NAV_LINKS.map(({ label, href }) => {
+            const isCast = label === "Cast";
+
+            return (
+              <li
+                key={href}
+                className="relative"
+                onMouseEnter={() => isCast && setCastOpen(true)}
+                onMouseLeave={() => isCast && setCastOpen(false)}
               >
-                {label}
-                {/* Underline — slides in left to right */}
-                <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-ember-gold group-hover:w-full transition-all duration-300" style={{ transitionTimingFunction: "cubic-bezier(0.23,1,0.32,1)" }} />
-              </button>
-            </li>
-          ))}
+                <button
+                  onClick={() => handleLinkClick(href)}
+                  className="group relative font-body text-[11px] tracking-[0.28em] uppercase text-pale-cream/50 hover:text-pale-cream/90 transition-colors duration-200"
+                >
+                  {label}
+                  <span
+                    className="absolute -bottom-0.5 left-0 w-0 h-px bg-ember-gold group-hover:w-full transition-all duration-300"
+                    style={{ transitionTimingFunction: "cubic-bezier(0.23,1,0.32,1)" }}
+                  />
+                </button>
+
+                {/* Cast dropdown */}
+                {isCast && (
+                  <AnimatePresence>
+                    {castOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -6 }}
+                        transition={{ duration: 0.18, ease: easeOut }}
+                        className="absolute top-full right-0 pt-4"
+                      >
+                        {/* Thin amber rule connecting button to dropdown */}
+                        <div className="absolute top-4 left-1/2 -translate-x-1/2 w-px h-0 bg-ember-gold/30" />
+
+                        <div className="bg-black/96 border border-ember-gold/18 backdrop-blur-sm min-w-[200px] py-2">
+                          {/* Amber top rule */}
+                          <div className="h-px bg-ember-gold/25 mx-4 mb-2" />
+
+                          {CAST.map(({ slug, actor, character }) => (
+                            <Link
+                              key={slug}
+                              href={`/cast/${slug}`}
+                              onClick={() => setCastOpen(false)}
+                              className="group/item flex flex-col px-5 py-2.5 transition-colors duration-150 hover:bg-ember-gold/[0.06]"
+                            >
+                              <span className="font-body text-[8.5px] tracking-[0.25em] uppercase text-pale-cream/25 group-hover/item:text-ember-gold/60 transition-colors duration-150">
+                                {character}
+                              </span>
+                              <span className="font-display text-[15px] font-light tracking-wider text-pale-cream/65 group-hover/item:text-pale-cream/95 transition-colors duration-150">
+                                {actor}
+                              </span>
+                            </Link>
+                          ))}
+
+                          <div className="h-px bg-ember-gold/12 mx-4 mt-2" />
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
+              </li>
+            );
+          })}
         </ul>
 
         {/* Hamburger — mobile */}
