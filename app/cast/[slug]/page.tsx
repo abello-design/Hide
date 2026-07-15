@@ -61,15 +61,6 @@ export default function ActorPage({ params }: { params: { slug: string } }) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 pointer-events-none" />
             </div>
 
-            {/* Character label + actor name below image */}
-            <div className="flex flex-col gap-1 pt-1">
-              <span className="font-body text-[10px] tracking-[0.22em] uppercase text-pale-cream/30">
-                {member.character}
-              </span>
-              <span className="font-display text-2xl md:text-3xl font-light text-pale-cream/80">
-                {member.actor}
-              </span>
-            </div>
           </div>
 
           {/* Right — bio */}
