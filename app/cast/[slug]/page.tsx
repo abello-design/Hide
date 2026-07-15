@@ -72,9 +72,16 @@ export default function ActorPage({ params }: { params: { slug: string } }) {
             </div>
           </div>
 
-          {/* Right — bio (blank until populated) */}
+          {/* Right — bio */}
           <div className="md:pt-2">
-            {/* Bio goes here */}
+            {member.bio && (
+              <div className="flex flex-col gap-6">
+                <div className="w-8 h-px bg-ember-gold/30" />
+                <p className="font-body text-[15px] leading-[1.85] text-pale-cream/60 tracking-wide">
+                  {member.bio}
+                </p>
+              </div>
+            )}
           </div>
 
         </div>
