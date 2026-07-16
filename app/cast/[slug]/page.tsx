@@ -61,6 +61,9 @@ export default function ActorPage({ params }: { params: { slug: string } }) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 pointer-events-none" />
             </div>
 
+            <span className="font-body text-[10px] tracking-[0.22em] uppercase text-pale-cream/30 pt-1">
+              {member.character}
+            </span>
           </div>
 
           {/* Right — bio */}
